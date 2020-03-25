@@ -1,13 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const session = require('express-session');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.use(session({
+  secret: 'test secret',
+  cookie: { maxAge: 60 * 1000 * 300 } //过期时间 ms
+}))
+
+router.get('/', function (req, res) {
+  //session 已经登陆
+  if (req.session.sign) {
+    console.log(req.session);
+    res.send('<strong>' + req.session.name + '</strong>' + 'Nice to see you again');
+  }
+  else {
+    //未登陆过
+    req.session.sign = true;
+    req.session.name = 'Type Zero';
+    res.end('Welcome:' + '<strong>' + req.session.name + '</strong>');
+  }
 });
-router.get('/api', function(req, res, next) {
-res.json({
-  data: "后台返回结果 xxxx"
-});});
 
 module.exports = router;

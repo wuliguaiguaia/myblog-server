@@ -16,6 +16,14 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
+ * connect mongodb.
+ */
+const connect = require('../database/init')
+;(async () => {
+  await connect()
+})()
+
+/**
  * Create HTTP server.
  */
 
