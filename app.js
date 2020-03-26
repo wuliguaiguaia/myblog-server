@@ -1,50 +1,37 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require("body-parser");
+require('express-async-errors');
+const createError = require('http-errors'),
+	express = require('express'),
+	app = express(),
+	path = require('path'),
+	cookieParser = require('cookie-parser'),
+	logger = require('morgan'),
+	bodyParser = require('body-parser'),
+	glob = require('glob');
 
-var indexRouter = require('./routes/index');
-var adminRouter = require('./routes/admin');
-var apiRouter = require('./routes/api');
+const loadRoutes = () => {
+	const pattern = path.resolve('./routes/**/index.js');
+	const files = glob.sync(pattern);
+	files.forEach(file => app.use('/api', require(file)));
+};
 
-var User = require("./database/schema/user");
-var app = express();
+const errorHandler = () => {
+	app.use((err, _, res, next)=> {
+		if (err.name !== 'ValidationError') next(createError(404));
+		let errors = Object.values(err.errors).map(error => error.message);
+		res.status(200);
+		res.json({ errNo: 0, message: err._message, errors });
+	});
+};
 
-// view engine setup
-app.set('view engine', 'ejs');
+const init = () => {
+	app.use(logger('dev'))
+		.use(express.json());
+	loadRoutes();
+	app.use(cookieParser())
+		.use(express.urlencoded({ extended: false }))
+		.use(bodyParser.urlencoded({ extended: true }));
+	errorHandler();
+};
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// todo: 静态资源托管
-app.use(express.static(path.join(__dirname, '../myblog/dist')));
-
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
-app.use('/api', apiRouter);
-
-app.use(bodyParser.urlencoded({
-   extended: true, //扩展模式
- }));
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  // res.render('error');
-});
-
+init();
 module.exports = app;
