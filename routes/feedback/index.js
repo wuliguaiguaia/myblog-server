@@ -3,7 +3,7 @@ const express = require('express'),
 	ctl = require('./controller');
 
 router
-	.post('/feedback', ctl.add)
+	.post('/feedbacks', ctl.add)
 	.get('/feedbacks', ctl.list);
 
 module.exports = router;

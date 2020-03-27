@@ -3,11 +3,11 @@ const  express = require('express'),
 	ctl = require('./controller'); 
 
 router
-	.get('/article/p/:id', ctl.p)
-	.post('/article', ctl.add)
-	.delete('/article/:id', ctl.remove)
-	.put('/article/:id', ctl.update)
+	.get('/articles/p/:id', ctl.p)
+	.post('/articles', ctl.add)
+	.delete('/articles/:id', ctl.remove)
+	.put('/articles/:id', ctl.update)
 	.get('/articles', ctl.posts)
-	.post('/article/:id/view-count', ctl.viewCount);
+	.post('/articles/:id/view-count', ctl.viewCount);
 
 module.exports = router;

@@ -16,7 +16,7 @@ const loadRoutes = () => {
 
 const errorHandler = () => {
 	app.use((err, _, res, next)=> {
-		if (err.name !== 'ValidationError') next(createError(404));
+		if (err.name !== 'ValidationError') next(createError(404, 'Invalid API key'));
 		let errors = Object.values(err.errors).map(error => error.message);
 		res.status(200);
 		res.json({ errNo: 0, message: err._message, errors });

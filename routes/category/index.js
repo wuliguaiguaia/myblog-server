@@ -3,8 +3,8 @@ const express = require('express'),
 	ctl = require('./controller');
 
 router
-	.post('/category', ctl.add)
-	.delete('/category/:id', ctl.remove)
+	.post('/categories', ctl.add)
+	.delete('/categories/:id', ctl.remove)
 	.get('/categories', ctl.list);
 
 module.exports = router;

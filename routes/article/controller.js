@@ -7,9 +7,9 @@ const mongoose = require('mongoose'),
  * */
 
 const p = async res => {
-	const id = res.body.params,
-		article = await Article.findById(id);
-	res.json({ errNo: 0,message: '获取成功', data: article});
+	const id = res.body.query,
+		data = await Article.findById(id);
+	res.json({ errNo: 0,message: '获取成功', data});
 };
 
 /**
@@ -17,9 +17,9 @@ const p = async res => {
  * @description 新增文章
  * */ 
 const add = async res => {
-	const params = res.body;
-	await Article.create(params);
-	res.json({ errNo: 0, message: '添加成功'});
+	const params = res.body,
+		data  = await Article.create(params);
+	res.json({ errNo: 0, message: '添加成功', data});
 };
 
 /**
@@ -29,7 +29,7 @@ const add = async res => {
 const remove = async res => {
 	const {id} = res.body.params;
 	await Article.findByIdAndRemove(id);
-	res.json({ errNo: 0, message: '删除成功'});
+	res.json({ errNo: 0, message: '删除成功', data: null});
 };
 
 /**
@@ -37,9 +37,9 @@ const remove = async res => {
  * @description 修改文章
  * */ 
 const update = async res => {
-	const params = res.body;
-	await Article.findByIdAndUpdate(params.id, params);
-	res.json({ errNo: 0, message: '修改成功'});
+	const params = res.body,
+		data = await Article.findByIdAndUpdate(params.id, params);
+	res.json({ errNo: 0, message: '修改成功', data});
 };
 
 /**
@@ -47,7 +47,7 @@ const update = async res => {
  * @description 文章列表
  * */ 
 const posts = async res => {
-	const { pn, num, category, keyTitle } = res.body.params,
+	const { pn, num, category, keyTitle } = res.body.query,
 		query = {},
 		skip = (pn-1) * num;
 
@@ -67,11 +67,11 @@ const posts = async res => {
  * @description 阅读量
  * */ 
 const viewCount = async res => {
-	const { id } = res.body.params;
-	const article = await Article.findById(id); 
-	article.viewCount++; 
-	await article.save();
-	res.json({ errNo: 0, message: '恭喜，新增阅读量😬' });
+	const { id } = res.body.params,
+		data = await Article.findById(id); 
+	data.viewCount++; 
+	await data.save();
+	res.json({ errNo: 0, message: '恭喜，新增阅读量😬', data});
 };
 
 

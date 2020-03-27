@@ -3,9 +3,9 @@ const express = require('express'),
 	ctl = require('./controller');
 
 router
-	.post('/comment/:id', ctl.add)
-	.delete('/comment/:id', ctl.remove)
-	.put('/comment/:id', ctl.update)
+	.post('/comments/:id', ctl.add)
+	.delete('/comments/:id', ctl.remove)
+	.put('/comments/:id', ctl.update)
 	.get('/comments', ctl.list);
 
 module.exports = router;

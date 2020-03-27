@@ -3,11 +3,11 @@ const express = require('express'),
 	ctl = require('./controller');
 
 router
-	.post('/user/registry', ctl.registry)
-	.post('/user/login', ctl.login)
-	.post('/user/loginout', ctl.loginout)
-	.delete('/user/:id', ctl.remove)
-	.put('/user/:id', ctl.update)
+	.post('/users/registry', ctl.registry)
+	.post('/users/login', ctl.login)
+	.post('/users/loginout', ctl.loginout)
+	.delete('/users/:id', ctl.remove)
+	.put('/users/:id', ctl.update)
 	.get('/users', ctl.list);
 
 module.exports = router;

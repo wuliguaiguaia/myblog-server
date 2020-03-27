@@ -6,9 +6,9 @@ const mongoose = require('mongoose'),
  * @description 新增分类
  * */
 const add = async res => {
-	const params = res.body;
-	await Category.create(params);
-	res.json({ errNo: 0, message: '添加成功'});
+	const params = res.body,
+		data = await Category.create(params);
+	res.json({ errNo: 0, message: '添加成功', data});
 };
 
 /**
@@ -18,7 +18,7 @@ const add = async res => {
 const remove = async res => {
 	const { id } = res.body.params;
 	await Category.findByIdAndRemove(id);
-	res.json({ errNo: 0, message: '删除成功'});
+	res.json({ errNo: 0, message: '删除成功', data: null});
 };
 
 /**
