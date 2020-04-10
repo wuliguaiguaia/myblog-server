@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-	url = 'mongodb://localhost:27017/node_server',
+	url = 'mongodb://localhost:27017/blog_server',
 	path = require('path'),
 	glob = require('glob');
 
@@ -14,10 +14,6 @@ const options = {
 const connect = () => {
 	return new Promise( resolve => {
 		mongoose.connect(url, options);
-
-		mongoose.connection.on('disconnected', () => {
-			mongoose.connect(url);
-		});
 
 		mongoose.connection.on('error', err => {
 			console.log(err);

@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
  * registry
  * @description 注册
  * */
-const registry = async res => {
+const registry = async (_, res) => {
 	res.json({ errNo: 0, message: '注册成功' });
 };
 
@@ -13,7 +13,7 @@ const registry = async res => {
  * login
  * @description 登录
  * */
-const login = async res => {
+const login = async (_, res) => {
 	res.json({ errNo: 0, message: '登录成功' });
 };
 
@@ -21,7 +21,7 @@ const login = async res => {
  * loginout
  * @description 退出
  * */
-const loginout = async res => {
+const loginout = async (_, res) => {
 	res.json({ errNo: 0, message: '登录成功' });
 };
 
@@ -29,7 +29,7 @@ const loginout = async res => {
  * remove
  * @description 删除用户
  * */
-const remove = async res => {
+const remove = async (_, res) => {
 	res.json({ errNo: 0, message: '删除成功' });
 };
 
@@ -37,7 +37,7 @@ const remove = async res => {
  * update
  * @description 修改用户
  * */
-const update = async res => {
+const update = async (_, res) => {
 	res.json({ errNo: 0, message: '修改成功' });
 };
 
@@ -45,7 +45,7 @@ const update = async res => {
  * list
  * @description 用户列表
  * */
-const list = async res => {
+const list = async (_, res) => {
 	res.json({ errNo: 0, data: [] });
 };
 

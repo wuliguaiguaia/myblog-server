@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
  * add
  * @description 新增评论
  * */
-const add = async res => {
+const add = async (_, res) => {
 	res.json({ errNo: 0, message: '添加成功' });
 };
 
@@ -13,7 +13,7 @@ const add = async res => {
  * remove
  * @description 删除评论
  * */
-const remove = async res => {
+const remove = async (_, res) => {
 	res.json({ errNo: 0, message: '删除成功' });
 };
 
@@ -21,7 +21,7 @@ const remove = async res => {
  * update
  * @description 修改评论
  * */
-const update = async res => {
+const update = async (_, res) => {
 	res.json({ errNo: 0, message: '修改成功' });
 };
 
@@ -29,7 +29,7 @@ const update = async res => {
  * list
  * @description 评论列表
  * */
-const list = async res => {
+const list = async (_, res) => {
 	res.json({errNo: 0, data:[]});
 };
 

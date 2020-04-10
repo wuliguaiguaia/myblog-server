@@ -13,10 +13,6 @@ const mongoose = require('mongoose'),
 				type: String,
 				required: '多少写点吧 :('
 			},
-			private: {
-				type: Boolean,
-				default: false
-			},
 			category: {
 				type: Schema.Types.ObjectId,
 				ref: 'Category',
@@ -30,6 +26,14 @@ const mongoose = require('mongoose'),
 			viewVount: {
 				type: Number,
 				default: 0
+			},
+			isPost: {
+				type: Boolean,
+				default: false
+			},
+			isPrivate: {
+				type: Boolean,
+				default: false
 			},
 			bg: {
 				type: String,

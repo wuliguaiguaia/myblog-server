@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
  * add
  * @description 新增反馈
  * */
-const add = async res => {
+const add = async (req, res) => {
 	res.json({ errNo: 0, message: '添加成功' });
 };
 
@@ -13,7 +13,7 @@ const add = async res => {
  * list
  * @description 反馈列表
  * */
-const list = async res => {
+const list = async (_, res) => {
 	res.json({ errNo: 0, data: [] });
 };
 
